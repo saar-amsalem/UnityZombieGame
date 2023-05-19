@@ -3,9 +3,9 @@ public class FmsScript : MonoBehaviour
 {
     CharacterController controller;
     public Transform cameraTransform; // 2 camera
-    public float playerSpeed = 5;
+    public float playerSpeed = 4;
 
-    public float mouseSensivity = 3;//1
+    public float mouseSensivity = 2;//1
     Vector2 look;
 
 
@@ -33,7 +33,7 @@ public class FmsScript : MonoBehaviour
         look.x += Input.GetAxis("Mouse X") * mouseSensivity; //2 camera
         look.y += Input.GetAxis("Mouse Y") * mouseSensivity; //2 camera
                                                              //Returns rotation z,x,y degrees around the z,x,y applied in that order.
-        look.y = Mathf.Clamp(look.y, -90, 90);
+        // look.y = Mathf.Clamp(look.y, -90, 90);
         cameraTransform.localRotation = Quaternion.Euler(-look.y, 0, 0); //2.1
         transform.localRotation = Quaternion.Euler(0, look.x, 0); //2 palyer
     }
