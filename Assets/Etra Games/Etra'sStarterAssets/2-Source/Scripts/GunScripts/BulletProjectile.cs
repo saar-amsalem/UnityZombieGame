@@ -20,7 +20,7 @@ public class BulletProjectile : MonoBehaviour
     private void Start()
     {
         bulletRigidbody.velocity = transform.forward * bulletSpeed;
-        Invoke("DestoryAfterTime", 10f);
+        Invoke("DestoryAfterTime", 3f);
     }
 
     private void OnTriggerEnter(Collider other)
