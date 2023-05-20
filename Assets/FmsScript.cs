@@ -3,10 +3,11 @@ public class FmsScript : MonoBehaviour
 {
     CharacterController controller;
     public Transform cameraTransform; // 2 camera
-    public float playerSpeed = 5;
-
-    public float mouseSensivity = 3;//1
+    public float playerSpeed = 3;
+    public GameObject zombie;
+    public float mouseSensivity = 2;//1
     Vector2 look;
+    Vector3 dest;
 
 
     Vector3 velocity; // 7 person
@@ -16,6 +17,7 @@ public class FmsScript : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        zombie.GetComponent<Animation>().Play("Z_Run_InPlace");
     }
     void Start()
     {
@@ -26,14 +28,22 @@ public class FmsScript : MonoBehaviour
     {
         UpdateLook(); //2
         UpdateMovement(); //3
-        UpdateGravity();   }
+        UpdateGravity();  
+        updateZombieMovement();
+    }
+
+    void updateZombieMovement(){
+        dest =new Vector3(cameraTransform.position.x, 0f, cameraTransform.position.z);
+        zombie.transform.position = Vector3.MoveTowards(zombie.transform.position, dest, playerSpeed*Time.deltaTime);
+        zombie.transform.rotation = Quaternion.Slerp(zombie.transform.rotation, Quaternion.LookRotation(cameraTransform.position - zombie.transform.position), playerSpeed*Time.deltaTime);
+    }
 
     void UpdateLook()
     {  //2
         look.x += Input.GetAxis("Mouse X") * mouseSensivity; //2 camera
         look.y += Input.GetAxis("Mouse Y") * mouseSensivity; //2 camera
                                                              //Returns rotation z,x,y degrees around the z,x,y applied in that order.
-        look.y = Mathf.Clamp(look.y, -90, 90);
+        // look.y = Mathf.Clamp(look.y, -90, 90);
         cameraTransform.localRotation = Quaternion.Euler(-look.y, 0, 0); //2.1
         transform.localRotation = Quaternion.Euler(0, look.x, 0); //2 palyer
     }
