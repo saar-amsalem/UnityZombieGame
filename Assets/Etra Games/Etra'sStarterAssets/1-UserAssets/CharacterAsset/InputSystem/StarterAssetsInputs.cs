@@ -159,7 +159,7 @@ namespace StarterAssets
             float horizantalMove = Input.GetAxis("Horizontal");
             float verticalMove = Input.GetAxis("Vertical");
             MoveInput(new Vector2(horizantalMove, verticalMove));
-
+            
             float horizantalLook = Input.GetAxis("Mouse X"); //For controller support you need to map the right joystick x to this axis
             float verticalLook = Input.GetAxis("Mouse Y") *-1; //For controller support you need to map the right joystick y to this axis
             LookInput(new Vector2(horizantalLook, verticalLook));
@@ -327,7 +327,7 @@ namespace StarterAssets
 
         private void SetCursorState(bool newState)
         {
-            Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
 #endif
