@@ -6,6 +6,7 @@ public class zombieController : MonoBehaviour
 {
     public Transform cameraTransform;
 
+    
     public bool dead = false;
 
     public float zombieSpeed = 3;
